@@ -104,6 +104,18 @@ d3.csv("players.csv").then(rawData =>{
                 .attr("height", distrHeight + distrMargin.top + distrMargin.bottom)
                 .attr("transform", `translate(${distrLeft}, ${distrTop})`);
 
+
+
+
+
+
+
+
+
+
+
+
+                
     //plot 2: Bar Chart for Team Player Count
 
     const teamCounts = processedData.reduce((s, { teamID }) => (s[teamID] = (s[teamID] || 0) + 1, s), {});
