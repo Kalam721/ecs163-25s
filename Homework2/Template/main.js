@@ -4,22 +4,20 @@ const height = window.innerHeight;
 
 let scatterLeft = 0, scatterTop = 0;
 let scatterMargin = {top: 20, right: 50, bottom: 30, left: 70},
-    scatterWidth = 300 - scatterMargin.left - scatterMargin.right,
+    scatterWidth = 800 - scatterMargin.left - scatterMargin.right,
     scatterHeight = 500 - scatterMargin.top - scatterMargin.bottom;
 
 let distrLeft = 400, distrTop = 0;
 let distrMargin = {top: 10, right: 30, bottom: 30, left: 60},
     distrWidth = 400 - distrMargin.left - distrMargin.right,
-    distrHeight = 350 - distrMargin.top - distrMargin.bottom;
+    distrHeight = 500 - distrMargin.top - distrMargin.bottom;
 
 let teamLeft = 0, teamTop = 10;
-let teamMargin = {top: 10, right: 30, bottom: 30, left: 700},
-    teamWidth = width-30 - teamMargin.left - teamMargin.right,
+let teamMargin = {top: 10, right: 30, bottom: 70, left: 500},
+    teamWidth = width-300 - teamMargin.left - teamMargin.right,
     teamHeight = height-150 - teamMargin.top - teamMargin.bottom;
 
 // plots
-//ds_salaries
-//players
 d3.csv("ds_salaries.csv").then(rawData =>{
     console.log("rawData", rawData);
 
@@ -71,7 +69,7 @@ d3.csv("ds_salaries.csv").then(rawData =>{
     .text("Salary in Usd (Usd Salary/1000)");
 
     // X ticks
-    const x1 = d3.scaleLog([0.65,800], [1, 960]).base(2);
+    const x1 = d3.scaleLog([0.65,1024], [0, scatterWidth]).base(2);
 
     const xAxisCall = d3.axisBottom(x1)
                         .ticks(10);
@@ -96,14 +94,13 @@ d3.csv("ds_salaries.csv").then(rawData =>{
     g1.append("g").call(yAxisCall);
 
     // circles
-    
     const circles = g1.selectAll("circle").data(processedData);
     circles.enter().append("circle")
          .attr("cx", d => x1(d.Buying_Power))
          .attr("cy", d => y1(d.Usd))
          .attr("r", 3)
+         //colors filled in depending on experience level type
          .attr("fill", function(d){ if(d.experience_level == "EX") return 'red'; if(d.experience_level == "SE") return 'steelblue'; if(d.experience_level == "MI") return 'orange'; else return 'purple'});
-         //.attr("fill", function(d){ return c10(d.experience_level)});
 
     const g2 = svg.append("g")
                 .attr("width", distrWidth + distrMargin.left + distrMargin.right)
