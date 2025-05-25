@@ -1,0 +1,48 @@
+<!doctype html>
+<html style="width:100%;height:100%;">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>D3 Interactive Dashboard</title>
+    <style>
+        /*creates dropdown container*/
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font: 12px sans-serif;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1000;
+        }
+        .dropdown-container {
+            position: absolute;
+            top: 20px;
+            right: 100px;
+            z-index: 100;
+        }
+        select {
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body style="width:100%;height:100%;margin: 0;">
+    <div class="dropdown-container">
+        <label for="sortDropdown">Sort bars by: </label>
+        <select id="sortDropdown">
+            <option value="descending">Count (High to Low)</option>
+            <option value="ascending">Count (Low to High)</option>
+            <option value="alphabetical">Alphabetical</option>
+        </select>
+    </div>
+    
+    <svg width="100%" height="100%">
+    </svg>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="genscript.js"></script>
+</body>
+</html>
